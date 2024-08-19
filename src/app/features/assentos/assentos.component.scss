@@ -1,0 +1,25 @@
+.square-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.occupied {
+  background-color: #ff4d4d;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.available {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.selected {
+  background-color: #ffc107;
+  color: #000;
+}
