@@ -1,0 +1,51 @@
+::ng-deep .p-toolbar {
+  border-radius: 0;
+  background: #fff;
+  border-color: #f4f4f4;
+  padding: 1.5rem 1rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-container {
+  flex: 1;
+}
+
+.p-toolbar-group-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.header-actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 32px;
+}
+
+.pi {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.ingressos {
+  color: #151411;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fixed-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it's above other content */
+  background-color: white; /* Set a background color to avoid content showing through */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a slight shadow for better visibility */
+}

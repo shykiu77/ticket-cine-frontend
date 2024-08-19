@@ -1,0 +1,63 @@
+<div class="col container">
+  <div class="d-flex flex-row align-items-center" style="margin-top: 128px">
+    <i class="pi pi-angle-left" style="font-size: 24px" role="button"></i>
+    <h1 class="text-center ms-auto me-auto">Sessões</h1>
+  </div>
+
+  <div class="d-flex flex-row flex-wrap justify-content-between gap-2 mt-5">
+    <div
+      *ngFor="let data of mockDatas"
+      [ngClass]="{
+        'text-muted': selectedDate && selectedDate !== data,
+        selected: selectedDate === data
+      }"
+      (click)="selectDate(data)"
+      role="button"
+      style="cursor: pointer"
+    >
+      <div class="d-flex flex-column align-items-center">
+        <h3 class="mb-0">{{ diaDaSemana(data) }}</h3>
+        <h4>{{ formatDate(data) }}</h4>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="d-flex flex-row mt-5 gap-5"
+    *ngIf="selectedDate && selectedSessions"
+  >
+    <app-cartaz
+      titulo="Um Filho"
+      [imagem]="img"
+      style="width: fit-content"
+    ></app-cartaz>
+    <div class="d-flex flex-column me-4 gap-3">
+      <div
+        *ngFor="let session of selectedSessions"
+        class="d-flex flex-column gap-2"
+      >
+        <h4 class="mb-0">Sala {{ session.room }}</h4>
+        <div class="d-flex flex-row gap-5 flex-wrap">
+          <div *ngFor="let time of session.times" class="session-time">
+            {{ time }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <div style="font-size: 24px; font-weight: 500">Resumo:</div>
+    <p style="font-size: 18px; color: #5f5d59">
+      Sequência do indicado ao Oscar, O Pai (2020). Florian Zeller traz às telas
+      O Filho, longa-metragem que conta a história de Peter (Hugh Jackman), cuja
+      vida agitada com a nova companheira é interrompida quando a ex-mulher Kate
+      (Laura Dern) chega com o filho adolescente problemático e distante,
+      Nicholas (Zen McGrath), deixando a família em caos. Embora Peter mal
+      conheça Nicholas, ele decide se dar uma chance e concorda em hospedá-lo. O
+      próprio Peter tem uma relação terrível com o pai, que era cruel quando
+      ainda estava em sua vida. Tudo parece indicar que o homem superou o trauma
+      da infância e espera ser um bom pai para Nicholas.
+    </p>
+  </div>
+</div>
