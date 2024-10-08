@@ -1,0 +1,41 @@
+<div style="margin-top: 128px">
+  <h2>Login</h2>
+  <form (ngSubmit)="login()">
+    <div>
+      <label for="email">Email:</label>
+      <input
+        id="email"
+        [(ngModel)]="email"
+        name="email"
+        type="email"
+        required
+      />
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        required
+      />
+    </div>
+    <div>
+      <label for="entityType">Entity Type:</label>
+      <select
+        id="entityType"
+        [(ngModel)]="entityType"
+        name="entityType"
+        required
+      >
+        <option value="operador">Operador</option>
+        <option value="cliente">Cliente</option>
+      </select>
+    </div>
+    <button type="submit" [disabled]="!email || !password || !entityType">
+      Login
+    </button>
+  </form>
+  <p *ngIf="error">{{ error }}</p>
+</div>

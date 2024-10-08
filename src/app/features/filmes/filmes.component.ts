@@ -4,6 +4,7 @@ import { IMG } from './mock-image';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FilmesService } from '@services/filmes.service';
+import { Filme } from 'app/models/filme';
 
 @Component({
   selector: 'app-filmes',
@@ -13,10 +14,16 @@ import { FilmesService } from '@services/filmes.service';
   styleUrls: ['./filmes.component.scss'],
 })
 export class FilmesComponent implements OnInit {
-  img = IMG;
-  filmes: any = [];
+  filmes: Filme[] = [];
   constructor(private filmesService: FilmesService) {}
   ngOnInit() {
-    this.filmes = this.filmesService.getFilmes();
+    this.filmesService.listarFilmes().subscribe(
+      (filmes) => {
+        this.filmes = filmes;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }
