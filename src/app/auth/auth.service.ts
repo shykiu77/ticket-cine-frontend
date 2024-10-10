@@ -7,8 +7,9 @@ import { Observable, tap, catchError, throwError } from 'rxjs';
 interface AuthRequest {
   email: string;
   senha: string;
-  entidade: 'operador' | 'cliente';
+  entidade: 'cliente' | 'operador' | 'gerente';
 }
+
 
 interface AuthResponse {
   token: string;
@@ -29,7 +30,7 @@ export class AuthService {
   login(
     email: string,
     senha: string,
-    entidade: 'operador' | 'cliente'
+    entidade: 'operador' | 'cliente' | 'gerente'
   ): Observable<AuthResponse> {
     const authRequest: AuthRequest = { email, senha, entidade };
     const url = `${environment.apiUrl}/api/auth`;
@@ -66,7 +67,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.isAuthenticated;
+    return this.isAuthenticated || !!localStorage.getItem('token');
   }
 
   private handleError(error: HttpErrorResponse) {

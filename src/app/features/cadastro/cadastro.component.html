@@ -1,0 +1,37 @@
+<div class="cadastro-container">
+  <div class="cadastro-box">
+    <h2>Cadastro</h2>
+
+    <!-- Mensagem de Sucesso -->
+    <p *ngIf="success" style="color: green">{{ success }}</p>
+
+    <!-- Mensagem de Erro -->
+    <p *ngIf="error" style="color: red">{{ error }}</p>
+
+    <form (ngSubmit)="cadastrar()">
+      <div class="input-group">
+        <label for="nome">Nome:</label>
+        <input id="nome" [(ngModel)]="nome" name="nome" type="text" placeholder="Digite seu nome" required />
+      </div>
+      <div class="input-group">
+        <label for="cpf">CPF:</label>
+        <input id="cpf" [(ngModel)]="cpf" name="cpf" type="text" placeholder="Digite seu CPF" required />
+      </div>
+      <div class="input-group">
+        <label for="dataNascimento">Data de Nascimento:</label>
+        <input id="dataNascimento" [(ngModel)]="dataNascimento" name="dataNascimento" type="date" required />
+      </div>
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input id="email" [(ngModel)]="email" name="email" type="email" placeholder="Digite seu email" required />
+      </div>
+      <div class="input-group">
+        <label for="senha">Senha:</label>
+        <input id="senha" [(ngModel)]="senha" name="senha" type="password" placeholder="Digite sua senha" required />
+      </div>
+      <button type="submit" [disabled]="!cpf || !nome || !dataNascimento || !email || !senha">Cadastrar</button>
+    </form>
+
+    <button (click)="navigateToLogin()">Já tem uma conta? Faça login</button>
+  </div>
+</div>
