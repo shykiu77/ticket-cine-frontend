@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
 import { environment } from 'environments/environment';  // Certifique-se de ter o environment configurado
 
 interface Operador {
@@ -36,5 +36,9 @@ export class OperadoresService {
 
   deleteOperador(cpf: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${cpf}`);
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    return throwError(() => error);
   }
 }
