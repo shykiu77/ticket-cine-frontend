@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/auth/auth.service';
 
 @Component({
   selector: 'app-gerente-home',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class GerenteHomeComponent {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   navigateTo(feature: string) {
     switch (feature) {
@@ -31,5 +32,11 @@ export class GerenteHomeComponent {
       default:
         break;
     }
+  }
+
+
+  logout() {
+    this.authService.logout(); // Chama o método logout do AuthService
+    this.router.navigate(['/login']); // Redireciona para a página de login
   }
 }
