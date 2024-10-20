@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';  // Importe o FormsModule
-
 import { FilmesService } from '@services/filmes.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { GeneroService } from '@services/genero.service';  // Serviço para obter gêneros
+import { AuthService } from 'app/auth/auth.service'; // Importe o AuthService
 
 interface Filme {
   idFilme: number;
@@ -47,7 +47,8 @@ export class FilmesGerenciaComponent implements OnInit {
   constructor(
     private filmesService: FilmesService,
     private generoService: GeneroService,  // Serviço para obter gêneros
-    private router: Router
+    private router: Router,
+    private authService: AuthService // Adicione o AuthService aqui
   ) {}
 
   ngOnInit(): void {
@@ -116,12 +117,22 @@ export class FilmesGerenciaComponent implements OnInit {
   }
 
   voltar() {
-    this.router.navigate(['/gerente-home']);
+    // Usa o AuthService para verificar o tipo de usuário
+    const userType = this.authService.getUserType();
+
+    // Redireciona para a home adequada com base no tipo de usuário
+    if (userType === 'gerente') {
+      this.router.navigate(['/gerente-home']);
+    } else if (userType === 'operador') {
+      this.router.navigate(['/operador-home']);
+    } else {
+      // Se for outro tipo de usuário, pode redirecionar para outra página ou dar erro
+      this.router.navigate(['/login']);
+    }
   }
 
   getGenero(idGenero: number | null): string {
     const genero = this.generos.find(g => g.idGenero === idGenero);
     return genero ? genero.tipo : 'Desconhecido';
   }
-
 }

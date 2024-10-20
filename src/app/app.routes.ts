@@ -42,13 +42,13 @@ export const routes: Routes = [
     path: 'gerente/operadores',
     component: OperadoresComponent,
     canActivate: [AuthGuard],  // Protege a rota com AuthGuard
-    data: { role: 'Gerente' }
+    data: { role: ['Gerente', 'Operador'] }, // Definindo que tanto 'Gerente' quanto 'Operador' podem acessar
   },
   {
     path: 'gerente/filmes-gerencia',
     component: FilmesGerenciaComponent,
     canActivate: [AuthGuard], // Proteção para Operador e Gerente
-    data: { role: ['Gerente'] },
+    data: { role: ['Gerente', 'Operador'] }, // Definindo que tanto 'Gerente' quanto 'Operador' podem acessar
   },
   {
     path: 'gerente/salas',
