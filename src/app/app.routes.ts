@@ -8,6 +8,7 @@ import { OperadorHomeComponent } from '@features/operador-home/operador-home.com
 import { GerenteHomeComponent } from '@features/gerente-home/gerente-home.component';  // Componente para home do gerente
 import { AuthGuard } from './auth/auth-guard';
 import {OperadoresComponent} from "@features/operadores/operadores.component";
+import {FilmesGerenciaComponent} from "@features/filmes-gerencia/filmes-gerencia.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'filmes', pathMatch: 'full' },
@@ -42,5 +43,12 @@ export const routes: Routes = [
     canActivate: [AuthGuard],  // Protege a rota com AuthGuard
     data: { role: 'Gerente' }
   },
+  {
+    path: 'gerente/filmes-gerencia',
+    component: FilmesGerenciaComponent,
+    canActivate: [AuthGuard], // Proteção para Operador e Gerente
+    data: { role: ['Gerente'] },
+  },
+
   { path: '**', redirectTo: 'filmes' },  // Redireciona qualquer rota inválida para filmes
 ];

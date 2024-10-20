@@ -26,9 +26,9 @@ export class AuthGuard implements CanActivate {
       const tokenPayload = this.jwtHelper.decodeToken(token);
       const userRole = tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
 
-      // Verifica se a rota atual requer um papel específico
-      if (route.data['role'] && route.data['role'] !== userRole) {
-        // Se o papel do usuário não for permitido, redireciona para o login
+      if (route.data['role'] && !route.data['role'].includes(userRole)) {
+        console.log('userRole', userRole);
+        console.log('route.data[\'role\']', route.data['role']);
         this.router.navigate(['/login']);
         return false;
       }

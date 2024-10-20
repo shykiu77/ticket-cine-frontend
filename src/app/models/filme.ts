@@ -4,5 +4,5 @@ export interface Filme {
   descricao: string;
   poster: string;
   duracao: number;
-  idGenero?: number;
+  idGenero?: number | null;
 }

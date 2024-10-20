@@ -21,7 +21,7 @@ export class GerenteHomeComponent {
         this.router.navigate(['/gerente/sessoes']);
         break;
       case 'filmes':
-        this.router.navigate(['/gerente/filmes']);
+        this.router.navigate(['/gerente/filmes-gerencia']);
         break;
       case 'operadores':
         this.router.navigate(['/gerente/operadores']);
