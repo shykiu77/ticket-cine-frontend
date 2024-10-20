@@ -9,6 +9,7 @@ import { GerenteHomeComponent } from '@features/gerente-home/gerente-home.compon
 import { AuthGuard } from './auth/auth-guard';
 import {OperadoresComponent} from "@features/operadores/operadores.component";
 import {FilmesGerenciaComponent} from "@features/filmes-gerencia/filmes-gerencia.component";
+import {SalasGerenciaComponent} from "@features/salas-gerencia/salas-gerencia.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'filmes', pathMatch: 'full' },
@@ -49,6 +50,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard], // Proteção para Operador e Gerente
     data: { role: ['Gerente'] },
   },
-
+  {
+    path: 'gerente/salas',
+    component: SalasGerenciaComponent,
+    canActivate: [AuthGuard], // Proteção para Operador e Gerente
+    data: { role: ['Gerente', 'Operador'] }, // Definindo que tanto 'Gerente' quanto 'Operador' podem acessar
+  },
   { path: '**', redirectTo: 'filmes' },  // Redireciona qualquer rota inválida para filmes
 ];
