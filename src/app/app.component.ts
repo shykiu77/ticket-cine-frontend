@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthService } from './auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import {NavbarComponent} from "@components/navbar/navbar.component";
 
 
 @Component({

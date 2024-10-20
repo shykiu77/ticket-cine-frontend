@@ -10,6 +10,8 @@ import { AuthGuard } from './auth/auth-guard';
 import {OperadoresComponent} from "@features/operadores/operadores.component";
 import {FilmesGerenciaComponent} from "@features/filmes-gerencia/filmes-gerencia.component";
 import {SalasGerenciaComponent} from "@features/salas-gerencia/salas-gerencia.component";
+import {IngressosComponent} from "@features/ingressos/ingressos.component";
+import {ClienteInfoComponent} from "@features/cliente-info/cliente-info.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'filmes', pathMatch: 'full' },
@@ -56,5 +58,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard], // Proteção para Operador e Gerente
     data: { role: ['Gerente', 'Operador'] }, // Definindo que tanto 'Gerente' quanto 'Operador' podem acessar
   },
+  { path: 'ingressos', component: IngressosComponent },
+  { path: 'cliente-info', component: ClienteInfoComponent },
   { path: '**', redirectTo: 'filmes' },  // Redireciona qualquer rota inválida para filmes
 ];
