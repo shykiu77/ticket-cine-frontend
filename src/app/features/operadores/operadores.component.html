@@ -1,0 +1,93 @@
+<div class="operadores-container">
+  <h2>Gerenciamento de Operadores</h2>
+
+  <!-- Botão Voltar -->
+  <div class="back-button">
+    <button class="btn back" (click)="voltar()">Voltar</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Formulário para adicionar/editar operador -->
+  <div class="form-section">
+    <h3>{{ editMode ? 'Editar Operador' : 'Adicionar Novo Operador' }}</h3>
+    <form #operadorForm="ngForm" (ngSubmit)="editMode ? salvarOperador() : adicionarOperador()">
+      <div class="input-group">
+        <label for="cpf">CPF:</label>
+        <input
+          id="cpf"
+          [(ngModel)]="operadorModel.cpf"
+          name="cpf"
+          [disabled]="editMode"
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="nome">Nome:</label>
+        <input id="nome" [(ngModel)]="operadorModel.nome" name="nome" required />
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input
+          id="email"
+          [(ngModel)]="operadorModel.email"
+          name="email"
+          type="email"
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="senha">Senha:</label>
+        <input
+          id="senha"
+          [(ngModel)]="operadorModel.senha"
+          name="senha"
+          type="password"
+          [required]="!editMode"
+        />
+      </div>
+
+      <div class="button-group">
+        <button
+          type="submit"
+          class="btn primary"
+          [disabled]="!operadorForm.form.valid"
+        >
+          {{ editMode ? 'Salvar' : 'Adicionar' }}
+        </button>
+        <button
+          type="button"
+          *ngIf="editMode"
+          class="btn secondary"
+          (click)="cancelarEdicao()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de operadores -->
+  <div class="list-section">
+    <h3>Operadores Cadastrados</h3>
+    <ul class="operadores-lista">
+      <li *ngFor="let operador of operadores">
+        <div class="operador-info">
+          <span class="nome">{{ operador.nome }}</span>
+          <span class="email">{{ operador.email }}</span>
+        </div>
+        <div class="action-buttons">
+          <button (click)="editarOperador(operador)" class="btn edit">Editar</button>
+          <button (click)="excluirOperador(operador.cpf)" class="btn delete">
+            Excluir
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

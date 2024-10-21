@@ -1,2 +1,7 @@
-<app-navbar></app-navbar>
-<router-outlet />
+<!-- Verifica se o usuário está logado e é um Cliente antes de exibir o Navbar -->
+<div *ngIf="isClient()">
+  <app-navbar></app-navbar>
+</div>
+
+<!-- Exibe as páginas via RouterOutlet -->
+<router-outlet></router-outlet>

@@ -1,0 +1,57 @@
+<div class="salas-container">
+  <h2>Gerenciamento de Salas</h2>
+
+  <div class="back-button">
+    <button class="btn back" (click)="voltar()">Voltar</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Formulário para adicionar/editar sala -->
+  <div class="form-section">
+    <h3>{{ editMode ? 'Editar Sala' : 'Adicionar Nova Sala' }}</h3>
+    <form #salaForm="ngForm" (ngSubmit)="editMode ? salvarSala() : adicionarSala()">
+      <div class="input-group">
+        <label for="numero">Número da Sala:</label>
+        <input id="numero" [(ngModel)]="salaModel.numero" name="numero" type="number" required />
+      </div>
+
+      <div class="input-group">
+        <label for="qtdAssentos">Quantidade de Assentos:</label>
+        <input id="qtdAssentos" [(ngModel)]="salaModel.qtdAssentos" name="qtdAssentos" type="number" required />
+      </div>
+
+      <div class="button-group">
+        <!-- O botão de adicionar/salvar só fica habilitado se numero > 0 e qtdAssentos > 0 -->
+        <button
+          type="submit"
+          class="btn primary"
+          [disabled]="!salaForm.form.valid || salaModel.numero <= 0 || salaModel.qtdAssentos <= 0"
+        >
+          {{ editMode ? 'Salvar' : 'Adicionar' }}
+        </button>
+        <button type="button" *ngIf="editMode" class="btn secondary" (click)="cancelarEdicao()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="list-section">
+    <h3>Salas Cadastradas</h3>
+    <ul class="salas-lista">
+      <li *ngFor="let sala of salas">
+        <div class="sala-info">
+          <span class="numero">Sala {{ sala.numero }}</span>
+          <span class="assentos">Assentos: {{ sala.qtdAssentos }}</span>
+        </div>
+        <div class="action-buttons">
+          <button (click)="editarSala(sala)" class="btn edit">Editar</button>
+          <button (click)="excluirSala(sala.idSala)" class="btn delete">Excluir</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="filmes-container">
+  <h2>Gerenciamento de Filmes</h2>
+
+  <!-- Botão Voltar -->
+  <div class="back-button">
+    <button class="btn back" (click)="voltar()">Voltar</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Formulário para adicionar/editar filme -->
+  <div class="form-section">
+    <h3>{{ editMode ? 'Editar Filme' : 'Adicionar Novo Filme' }}</h3>
+    <form #filmeForm="ngForm" (ngSubmit)="editMode ? salvarFilme() : adicionarFilme()">
+      <div class="input-group">
+        <label for="titulo">Título:</label>
+        <input id="titulo" [(ngModel)]="filmeModel.titulo" name="titulo" required />
+      </div>
+
+      <div class="input-group">
+        <label for="descricao">Descrição:</label>
+        <input id="descricao" [(ngModel)]="filmeModel.descricao" name="descricao" required />
+      </div>
+
+      <div class="input-group">
+        <label for="poster">Poster URL:</label>
+        <input id="poster" [(ngModel)]="filmeModel.poster" name="poster" required />
+      </div>
+
+      <div class="input-group">
+        <label for="duracao">Duração (min):</label>
+        <input id="duracao" [(ngModel)]="filmeModel.duracao" name="duracao" type="number" required />
+      </div>
+
+      <div class="input-group">
+        <label for="genero">Gênero:</label>
+        <select id="genero" [(ngModel)]="filmeModel.idGenero" name="idGenero" required>
+          <option *ngFor="let genero of generos" [value]="genero.idGenero">
+            {{ genero.tipo }}
+          </option>
+        </select>
+      </div>
+
+
+      <div class="button-group">
+        <button
+          type="submit"
+          class="btn primary"
+          [disabled]="!filmeForm.form.valid"
+        >
+          {{ editMode ? 'Salvar' : 'Adicionar' }}
+        </button>
+        <button
+          type="button"
+          *ngIf="editMode"
+          class="btn secondary"
+          (click)="cancelarEdicao()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de filmes -->
+  <!-- Lista de filmes -->
+  <div class="list-section">
+    <h3>Filmes Cadastrados</h3>
+    <ul class="filmes-lista">
+      <li *ngFor="let filme of filmes">
+        <div class="filme-poster">
+          <img [src]="filme.poster" alt="{{ filme.titulo }}" />
+        </div>
+        <div class="filme-info">
+          <span class="titulo">{{ filme.titulo }}</span>
+          <span class="descricao">{{ filme.descricao }}</span>
+          <span class="duracao">Duração: {{ filme.duracao }} min</span>
+          <span class="genero">Gênero: {{ getGenero(filme.idGenero ?? null) }}</span>
+        </div>
+        <div class="action-buttons">
+          <button (click)="editarFilme(filme)" class="btn edit">Editar</button>
+          <button (click)="excluirFilme(filme.idFilme)" class="btn delete">
+            Excluir
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

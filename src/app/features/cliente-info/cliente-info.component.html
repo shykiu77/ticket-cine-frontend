@@ -1,0 +1,26 @@
+<div>
+  <h2>Informações do Cliente</h2>
+  <form (ngSubmit)="updateCliente()">
+    <div>
+      <label for="nome">Nome:</label>
+      <input id="nome" [(ngModel)]="cliente.nome" name="nome" />
+    </div>
+
+    <div>
+      <label for="cpf">CPF:</label>
+      <input id="cpf" [(ngModel)]="cliente.cpf" name="cpf" disabled />
+    </div>
+
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" [(ngModel)]="cliente.email" name="email" />
+    </div>
+
+    <div>
+      <label for="dataNascimento">Data de Nascimento:</label>
+      <input id="dataNascimento" type="date" [(ngModel)]="cliente.dataNascimento" name="dataNascimento" />
+    </div>
+
+    <button type="submit">Atualizar Informações</button>
+  </form>
+</div>

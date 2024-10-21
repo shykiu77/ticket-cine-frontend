@@ -1,0 +1,13 @@
+<div class="ingressos-container">
+  <h2>Meus Ingressos</h2>
+  <div *ngIf="ingressos.length > 0; else noIngressos">
+    <ul>
+      <li *ngFor="let ingresso of ingressos">
+        Filme: {{ ingresso.filmeTitulo }} | Sessão: {{ ingresso.sessaoHoraInicio }} | Assento: {{ ingresso.assento }}
+      </li>
+    </ul>
+  </div>
+  <ng-template #noIngressos>
+    <p>Você ainda não comprou nenhum ingresso.</p>
+  </ng-template>
+</div>

@@ -1,38 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Filme } from '../models/filme';
+import { Sala } from '../models/sala';
 import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FilmesService {
-  baseUrl = '/api/filmes';
+export class SalasService {
+  baseUrl = '/api/salas';
 
   constructor(protected http: HttpClient) {}
 
-  listarFilmes(): Observable<Filme[]> {
+  listarSalas(): Observable<Sala[]> {
     const url = environment.apiUrl + this.buildPath('');
-    return this.http.get<Filme[]>(url);
+    return this.http.get<Sala[]>(url);
   }
 
-  getFilmeById(id: number): Observable<Filme | undefined> {
+  getSalaById(id: number): Observable<Sala | undefined> {
     const url = environment.apiUrl + this.buildPath('/' + id);
-    return this.http.get<Filme>(url);
+    return this.http.get<Sala>(url);
   }
 
-  adicionarFilme(filme: Filme): Observable<any> {
+  adicionarSala(sala: Sala): Observable<any> {
     const url = environment.apiUrl + this.buildPath('');
-    return this.http.post(url, filme);
+    return this.http.post(url, sala);
   }
 
-  atualizarFilme(filme: Filme): Observable<any> {
-    const url = environment.apiUrl + this.buildPath('/' + filme.idFilme);
-    return this.http.put(url, filme);
+  atualizarSala(sala: Sala): Observable<any> {
+    const url = environment.apiUrl + this.buildPath('/' + sala.idSala);
+    return this.http.put(url, sala);
   }
 
-  excluirFilme(id: number): Observable<any> {
+  excluirSala(id: number): Observable<any> {
     const url = environment.apiUrl + this.buildPath('/' + id);
     return this.http.delete(url);
   }
